@@ -13,9 +13,17 @@ import Home from './pages/HomePage';
 import Products from './pages/ProductsPage';
 import SingleProduct from './pages/SingleProductPage';
 
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import SideCart from './components/SideCart';
+import Footer from './components/Footer';
+
 function App() {
   return (
     <>
+      <Navbar />
+      <Sidebar />
+      <SideCart />
       <Switch>
         <Route exact path='/' component={Home}></Route>
         <Route exact path='/about' component={About}></Route>
@@ -25,6 +33,7 @@ function App() {
         <Route exact path='/products' component={Products}></Route>
         <Route exact path='/products/:id' component={SingleProduct}></Route>
       </Switch>
+      <Footer />
     </>
   );
 }
