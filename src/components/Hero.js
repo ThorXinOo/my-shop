@@ -16,6 +16,7 @@ export default function Hero({ img, title, max, children }) {
 }
 
 const HeroWrapper = styled.div`
+  border: 1px solid blue;
   text-align: center;
   display: flex;
   align-items: center;
@@ -26,7 +27,6 @@ const HeroWrapper = styled.div`
     url(${(props) => props.img}) center/cover no-repeat;
 
   .title {
-    padding: 2rem;
     font-size: 3.5rem;
     text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
