@@ -9,7 +9,11 @@ export default function Contact() {
       <div className='row'>
         <div className='col-10 mx-auto col-md-6 my-3'>
           <Title title='Contact Us' />
-          <form className='mt-5'>
+          <form
+            className='mt-5'
+            action='https://formspree.io/f/maylqbzd'
+            method='post'
+          >
             <div className='form-gorup my-3'>
               <input
                 type='text'
@@ -42,11 +46,16 @@ export default function Contact() {
                 placeholder='Hello there buddy'
               ></textarea>
             </div>
+            <div className='form-group mt-3'>
+              <input
+                type='submit'
+                className='form-control bg-primary text-white'
+                value='Send'
+              />
+            </div>
           </form>
         </div>
-        <div className='col-10 mx-auto col-md-6 my-3'></div>
       </div>
-      Hello from Contact Component
     </section>
   );
 }
