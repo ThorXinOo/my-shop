@@ -12,7 +12,6 @@ class ProductProvider extends Component {
   state = {
     sidebarOpen: false,
     cartOpen: false,
-    cartItems: 2,
     links: linkData,
     socials: socialData,
     cart: [],
@@ -21,10 +20,58 @@ class ProductProvider extends Component {
     cartTax: 0,
     cartTotal: 0,
     storeProducts: [],
-    filteredProduct: [],
+    filteredProducts: [],
     featuredProducts: [],
     sigleProduct: {},
     loading: true,
+  };
+
+  componentDidMount() {
+    this.setProducts(items);
+  }
+
+  setProducts = (products) => {
+    let storeProducts = products.map((item) => {
+      const { id } = item.sys;
+      const product = { id, ...item.fields };
+      return product;
+    });
+    // console.log(storeProducts);
+
+    let featuredProducts = storeProducts.filter(
+      (item) => item.featured === true
+    );
+
+    this.setState({
+      storeProducts,
+      featuredProducts,
+      filteredProducts: storeProducts,
+      cart: this.getStorageCart(),
+      singleProduct: this.getStorageProduct(),
+      loading: false,
+    });
+  };
+
+  getStorageCart = () => {
+    return [];
+  };
+
+  getStorageProduct = () => {
+    return {};
+  };
+
+  getTotals = () => {};
+
+  addTotals = () => {};
+
+  syncStorage = () => {};
+
+  addtoCart = (id) => {
+    console.log(id);
+  };
+
+  setSingleProduct = (id) => {
+    console.log(`Single Product ${id}`);
   };
 
   handleSidebar = () => {
@@ -48,6 +95,9 @@ class ProductProvider extends Component {
           handleCart: this.handleCart,
           closeCart: this.closeCart,
           openCart: this.openCart,
+          setProducts: this.setProudcts,
+          addtoCart: this.addtoCart,
+          setSingleProduct: this.setSingleProduct,
         }}
       >
         {this.props.children}
