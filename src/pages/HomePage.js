@@ -14,6 +14,7 @@ export default function HomePage() {
         </Link>
       </Hero>
       <Service />
+      <Featured />
     </>
   );
 }
