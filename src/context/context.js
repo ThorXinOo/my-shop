@@ -15,7 +15,7 @@ class ProductProvider extends Component {
     links: linkData,
     socials: socialData,
     cart: [],
-    cartItmes: 0,
+    cartItems: 0,
     cartSubTotal: 0,
     cartTax: 0,
     cartTotal: 0,
@@ -43,14 +43,19 @@ class ProductProvider extends Component {
       (item) => item.featured === true
     );
 
-    this.setState({
-      storeProducts,
-      featuredProducts,
-      filteredProducts: storeProducts,
-      cart: this.getStorageCart(),
-      singleProduct: this.getStorageProduct(),
-      loading: false,
-    });
+    this.setState(
+      {
+        storeProducts,
+        featuredProducts,
+        filteredProducts: storeProducts,
+        cart: this.getStorageCart(),
+        singleProduct: this.getStorageProduct(),
+        loading: false,
+      },
+      () => {
+        this.addTotals();
+      }
+    );
   };
 
   getStorageCart = () => {
@@ -61,14 +66,69 @@ class ProductProvider extends Component {
     return {};
   };
 
-  getTotals = () => {};
+  getTotals = () => {
+    let subTotal = 0;
+    let cartItems = 0;
+    this.state.cart.forEach((item) => {
+      subTotal += item.total;
+      cartItems += item.count;
+    });
 
-  addTotals = () => {};
+    subTotal = parseFloat(subTotal.toFixed(2));
+    let tax = subTotal * 0.2;
+    tax = parseFloat(tax.toFixed(2));
+    let total = subTotal + tax;
+    total = parseFloat(total.toFixed(2));
+    return {
+      cartItems,
+      subTotal,
+      tax,
+      total,
+    };
+  };
+
+  addTotals = () => {
+    const totals = this.getTotals();
+    this.setState({
+      cartItems: totals.cartItems,
+      cartSubTotal: totals.subTotal,
+      cartTax: totals.tax,
+      cartTotal: totals.total,
+    });
+  };
 
   syncStorage = () => {};
 
   addtoCart = (id) => {
-    console.log(id);
+    // console.log(id);
+    let tempCart = [...this.state.cart];
+    let tempProduct = [...this.state.storeProducts];
+    let tempItem = tempCart.find((item) => item.id === id);
+    // console.log(tempItem);
+    if (!tempItem) {
+      tempItem = tempProduct.find((item) => item.id === id);
+      let total = tempItem.price;
+      let cartItem = { ...tempItem, count: 1, total };
+      tempCart = [...tempCart, cartItem];
+      // console.log(tempCart);
+    } else {
+      console.log('no ok');
+      tempItem.count++;
+      tempItem.total = tempItem.price * tempItem.count;
+      tempItem.total = parseFloat(tempItem.total.toFixed(2));
+      // console.log(tempItem.total);
+    }
+
+    this.setState(
+      () => {
+        return { cart: tempCart };
+      },
+      () => {
+        this.addTotals();
+        this.syncStorage();
+        this.openCart();
+      }
+    );
   };
 
   setSingleProduct = (id) => {
