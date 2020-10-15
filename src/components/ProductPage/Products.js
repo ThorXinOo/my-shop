@@ -9,7 +9,7 @@ export default function Products() {
   return (
     <ProductConsumer>
       {(value) => {
-        const { filteredProducts } = value;
+        const { filteredProducts, showMore } = value;
         return (
           <section className='py-5'>
             <div className='container'>
@@ -19,6 +19,7 @@ export default function Products() {
                   return <Product key={product.id} product={product} />;
                 })}
               </div>
+              <button onClick={showMore}>load more</button>
             </div>
           </section>
         );

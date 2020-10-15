@@ -24,6 +24,8 @@ class ProductProvider extends Component {
     featuredProducts: [],
     sigleProduct: {},
     loading: true,
+    next: 3,
+    arrayForHoldingProduct: [],
   };
 
   componentDidMount() {
@@ -47,15 +49,40 @@ class ProductProvider extends Component {
       {
         storeProducts,
         featuredProducts,
-        filteredProducts: storeProducts,
+        // filteredProducts: storeProducts,
         cart: this.getStorageCart(),
         singleProduct: this.getStorageProduct(),
         loading: false,
       },
       () => {
         this.addTotals();
+        this.showProduct(0, 3);
       }
     );
+  };
+
+  showProduct = (start, end) => {
+    let arrayForHoldingProduct = [];
+    const slicePrdouct = this.state.storeProducts.slice(start, end);
+    arrayForHoldingProduct = [
+      ...this.state.arrayForHoldingProduct,
+      ...slicePrdouct,
+    ];
+    this.setState({
+      filteredProducts: arrayForHoldingProduct,
+      arrayForHoldingProduct: arrayForHoldingProduct,
+    });
+  };
+
+  showMore = () => {
+    // console.log(this.state.next);
+    // let next = this.state.next + 3;
+    // this.showProduct(this.state.next, next);
+    // this.setState({
+    //   next: next,
+    // });
+    this.showProduct(this.state.next, this.state.next + 3);
+    this.setState({ next: this.state.next + 3 });
   };
 
   getStorageCart = () => {
@@ -175,6 +202,8 @@ class ProductProvider extends Component {
           setProducts: this.setProudcts,
           addtoCart: this.addtoCart,
           setSingleProduct: this.setSingleProduct,
+          showMore: this.showMore,
+          showProduct: this.showProduct,
         }}
       >
         {this.props.children}
