@@ -58,7 +58,7 @@ class ProductProvider extends Component {
         this.addTotals();
         this.setLoading();
         setTimeout(() => {
-          this.showProduct(0, 6);
+          this.showProduct(0, 6, 'set');
         }, 1000);
       }
     );
@@ -69,7 +69,7 @@ class ProductProvider extends Component {
       loading: true,
     });
   };
-  showProduct = (start, end) => {
+  showProduct = (start, end, type = '') => {
     let arrayForHoldingProduct = [];
     const slicePrdouct = this.state.storeProducts.slice(start, end);
     arrayForHoldingProduct = [
@@ -89,9 +89,10 @@ class ProductProvider extends Component {
   };
 
   showMore = () => {
+    // this.setLoading();
+    this.showProduct(this.state.next, this.state.next + 6);
     this.setLoading();
     setTimeout(() => {
-      this.showProduct(this.state.next, this.state.next + 6);
       this.setState({ next: this.state.next + 6, loading: false });
     }, 1000);
   };

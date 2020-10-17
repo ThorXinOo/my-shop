@@ -10,7 +10,7 @@ export default function Products() {
   return (
     <ProductConsumer>
       {(value) => {
-        const { filteredProducts, showMore, loading } = value;
+        const { storeProducts, filteredProducts, showMore, loading } = value;
         return (
           <section className='py-5'>
             <div className='container'>
@@ -20,7 +20,23 @@ export default function Products() {
                   return <Product key={product.id} product={product} />;
                 })}
               </div>
-              <button onClick={showMore}>load more</button>
+              {/* <button onClick={showMore}>load more</button>
+               */}
+              <div className='row mt-0'>
+                <div className='col text-center'>
+                  {storeProducts.length !== filteredProducts.length ? (
+                    loading ? ( // <button className='main-link'>Loading...</button>
+                      <p>Loading...</p>
+                    ) : (
+                      <button onClick={showMore} className='main-link'>
+                        More products
+                      </button>
+                    )
+                  ) : (
+                    <p>No more Product</p>
+                  )}
+                </div>
+              </div>
             </div>
           </section>
         );
