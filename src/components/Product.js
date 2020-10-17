@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaSearch, FaCartPlus } from 'react-icons/fa';
 import { ProductConsumer, ProudctConsumer } from '../context';
+import Loader from './Loader';
 export default function Product({ product }) {
   return (
     <ProductConsumer>
@@ -12,6 +13,8 @@ export default function Product({ product }) {
         const { addtoCart, setSingleProduct } = value;
         return (
           <ProductWrapper className='col-10 mx-auto col-sm-8 col-md-6 col-lg-4 my-3'>
+            <Loader></Loader>
+
             <div className='card'>
               <div className='img-container'>
                 <img

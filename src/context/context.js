@@ -24,7 +24,7 @@ class ProductProvider extends Component {
     featuredProducts: [],
     sigleProduct: {},
     loading: true,
-    next: 3,
+    next: 6,
     arrayForHoldingProduct: [],
   };
 
@@ -56,11 +56,19 @@ class ProductProvider extends Component {
       },
       () => {
         this.addTotals();
-        this.showProduct(0, 3);
+        this.setLoading();
+        setTimeout(() => {
+          this.showProduct(0, 6);
+        }, 1000);
       }
     );
   };
 
+  setLoading = () => {
+    this.setState({
+      loading: true,
+    });
+  };
   showProduct = (start, end) => {
     let arrayForHoldingProduct = [];
     const slicePrdouct = this.state.storeProducts.slice(start, end);
@@ -71,18 +79,16 @@ class ProductProvider extends Component {
     this.setState({
       filteredProducts: arrayForHoldingProduct,
       arrayForHoldingProduct: arrayForHoldingProduct,
+      loading: false,
     });
   };
 
   showMore = () => {
-    // console.log(this.state.next);
-    // let next = this.state.next + 3;
-    // this.showProduct(this.state.next, next);
-    // this.setState({
-    //   next: next,
-    // });
-    this.showProduct(this.state.next, this.state.next + 3);
-    this.setState({ next: this.state.next + 3 });
+    this.setLoading();
+    setTimeout(() => {
+      this.showProduct(this.state.next, this.state.next + 6);
+      this.setState({ next: this.state.next + 6, loading: false });
+    }, 1000);
   };
 
   getStorageCart = () => {
@@ -204,6 +210,7 @@ class ProductProvider extends Component {
           setSingleProduct: this.setSingleProduct,
           showMore: this.showMore,
           showProduct: this.showProduct,
+          setLoading: this.setLoading,
         }}
       >
         {this.props.children}
