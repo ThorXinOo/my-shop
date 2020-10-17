@@ -79,8 +79,13 @@ class ProductProvider extends Component {
     this.setState({
       filteredProducts: arrayForHoldingProduct,
       arrayForHoldingProduct: arrayForHoldingProduct,
-      loading: false,
+      loading: true,
     });
+    setTimeout(() => {
+      this.setState({
+        loading: false,
+      });
+    }, 2000);
   };
 
   showMore = () => {
