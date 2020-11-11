@@ -10,7 +10,13 @@ export default function Products() {
   return (
     <ProductConsumer>
       {(value) => {
-        const { storeProducts, filteredProducts, showMore, loading } = value;
+        const {
+          storeProducts,
+          filteredProducts,
+          showMore,
+          loading,
+          seemoreload,
+        } = value;
         return (
           <section className='py-5'>
             <div className='container'>

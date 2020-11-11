@@ -26,6 +26,7 @@ class ProductProvider extends Component {
     loading: true,
     next: 6,
     arrayForHoldingProduct: [],
+    seemoreload: false,
   };
 
   componentDidMount() {
@@ -76,10 +77,10 @@ class ProductProvider extends Component {
       ...this.state.arrayForHoldingProduct,
       ...slicePrdouct,
     ];
+
     this.setState({
       filteredProducts: arrayForHoldingProduct,
       arrayForHoldingProduct: arrayForHoldingProduct,
-      loading: true,
     });
     setTimeout(() => {
       this.setState({
@@ -91,10 +92,12 @@ class ProductProvider extends Component {
   showMore = () => {
     // this.setLoading();
     this.showProduct(this.state.next, this.state.next + 6);
-    this.setLoading();
+    this.setState({
+      seemoreload: true,
+    });
     setTimeout(() => {
-      this.setState({ next: this.state.next + 6, loading: false });
-    }, 1000);
+      this.setState({ next: this.state.next + 6, seemoreload: false });
+    }, 2000);
   };
 
   getStorageCart = () => {
@@ -134,6 +137,7 @@ class ProductProvider extends Component {
     };
   };
 
+  //addTotals
   addTotals = () => {
     const totals = this.getTotals();
     this.setState({
@@ -144,6 +148,7 @@ class ProductProvider extends Component {
     });
   };
 
+  // syncStorage session of cart
   syncStorage = () => {
     localStorage.setItem('cart', JSON.stringify(this.state.cart));
   };
@@ -159,9 +164,9 @@ class ProductProvider extends Component {
       let total = tempItem.price;
       let cartItem = { ...tempItem, count: 1, total };
       tempCart = [...tempCart, cartItem];
-      // console.log(tempCart);
+      console.log(tempCart);
     } else {
-      console.log('no ok');
+      // console.log('no ok');
       tempItem.count++;
       tempItem.total = tempItem.price * tempItem.count;
       tempItem.total = parseFloat(tempItem.total.toFixed(2));
