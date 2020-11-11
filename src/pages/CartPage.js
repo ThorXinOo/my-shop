@@ -9,7 +9,6 @@ export default function CartPage() {
     <>
       <>
         <Hero img={cartBcg} />
-        <div>Carts Totals</div>
       </>
       <CartSection />
     </>

@@ -8,10 +8,13 @@ import CartTotals from './CartTotals';
 
 export default function cartPage() {
   return (
-    <div>
+    <section className='py-5'>
+      <div className='container'>
+        <Title title='your cart items' center></Title>
+      </div>
       <CartColumns />
       <CartList />
       <CartTotals />
-    </div>
+    </section>
   );
 }
