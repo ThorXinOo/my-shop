@@ -7,19 +7,22 @@ export default function CartColumns() {
     <div className='container-fluid text-center d-none d-lg-block'>
       <div className='row'>
         <div className='col-lg-2'>
-          <p className='text-upper'>proudcts </p>
+          <p className='text-uppercase'>proudcts </p>
         </div>
         <div className='col-lg-2'>
-          <p className='text-upper'>name of products </p>
+          <p className='text-uppercase'>name of products </p>
         </div>
         <div className='col-lg-2'>
-          <p className='text-upper'>price </p>
+          <p className='text-uppercase'>price </p>
         </div>
         <div className='col-lg-2'>
-          <p className='text-upper'>remove </p>
+          <p className='text-uppercase'>quantity</p>
         </div>
         <div className='col-lg-2'>
-          <p className='text-upper'>total </p>
+          <p className='text-uppercase'>remove </p>
+        </div>
+        <div className='col-lg-2'>
+          <p className='text-uppercase'>total </p>
         </div>
       </div>
     </div>
