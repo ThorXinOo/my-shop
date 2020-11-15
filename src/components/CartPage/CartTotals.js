@@ -12,7 +12,10 @@ export default function CartTotals() {
             const { cartSubTotal, cartTax, cartTotal, clearCart } = value;
             return (
               <div className='col text-title text-center my-4'>
-                <button className='btn btn-outline-danger text-capitalize mb-4'>
+                <button
+                  className='btn btn-outline-danger text-capitalize mb-4'
+                  onClick={clearCart}
+                >
                   Clear Cart
                 </button>
                 <h3>SubTotal : ${cartSubTotal}</h3>
