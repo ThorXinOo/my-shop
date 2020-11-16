@@ -27,6 +27,12 @@ class ProductProvider extends Component {
     next: 6,
     arrayForHoldingProduct: [],
     seemoreload: false,
+    search: '',
+    price: 0,
+    min: 0,
+    max: 0,
+    company: 'all',
+    shipping: false,
   };
 
   componentDidMount() {
@@ -45,6 +51,7 @@ class ProductProvider extends Component {
     let featuredProducts = storeProducts.filter(
       (item) => item.featured === true
     );
+    let maxPrice = Math.max(...storeProducts.map((item) => item.price));
 
     this.setState(
       {
@@ -54,6 +61,8 @@ class ProductProvider extends Component {
         cart: this.getStorageCart(),
         singleProduct: this.getStorageProduct(),
         loading: false,
+        price: maxPrice,
+        max: maxPrice,
       },
       () => {
         this.addTotals();
@@ -287,6 +296,13 @@ class ProductProvider extends Component {
         this.syncStorage();
       }
     );
+  };
+  //handle change
+  handleChange = () => {
+    console.log('Handle Change');
+  };
+  sortData = () => {
+    console.log('Sort Data');
   };
   render() {
     return (
