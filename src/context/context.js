@@ -32,7 +32,7 @@ class ProductProvider extends Component {
     min: 0,
     max: 0,
     company: 'all',
-    shipping: true,
+    shipping: false,
   };
 
   componentDidMount() {

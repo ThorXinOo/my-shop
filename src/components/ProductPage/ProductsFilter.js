@@ -13,10 +13,19 @@ export default function ProductsFilter() {
           min,
           company,
           price,
-          shippping,
+          shipping,
           hanldeChange,
           storeProducts,
         } = value;
+        // let companies = storeProducts.map((item) => item.company);
+        // console.log(companies);
+        let companies = new Set();
+        companies.add('all');
+        for (let product in storeProducts) {
+          companies.add(storeProducts[product]['company']);
+        }
+        companies = [...companies];
+        console.log(companies);
         return (
           <div className='row my-5'>
             <div className='col-10 mx-auto'>
@@ -41,10 +50,13 @@ export default function ProductsFilter() {
                     value={company}
                     className='filter-item'
                   >
-                    <option value='all'>all</option>
-                    <option value='all'>all</option>
-                    <option value='all'>all</option>
-                    <option value='all'>all</option>
+                    {companies.map((company, index) => {
+                      return (
+                        <option key={index} value={company}>
+                          {company}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
                 <div>
@@ -72,7 +84,7 @@ export default function ProductsFilter() {
                     type='checkbox'
                     name='shipping'
                     id='shipping'
-                    value={shippping && true}
+                    checked={shipping && true}
                     onChange={hanldeChange}
                   />
                 </div>
