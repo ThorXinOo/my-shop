@@ -57,7 +57,7 @@ class ProductProvider extends Component {
       {
         storeProducts,
         featuredProducts,
-        // filteredProducts: storeProducts,
+        filteredProducts: storeProducts,
         cart: this.getStorageCart(),
         singleProduct: this.getStorageProduct(),
         loading: false,
@@ -81,14 +81,14 @@ class ProductProvider extends Component {
   };
   showProduct = (start, end, type = '') => {
     let arrayForHoldingProduct = [];
-    const slicePrdouct = this.state.storeProducts.slice(start, end);
+    const slicePrdouct = this.state.filteredProducts.slice(start, end);
     arrayForHoldingProduct = [
       ...this.state.arrayForHoldingProduct,
       ...slicePrdouct,
     ];
 
     this.setState({
-      filteredProducts: arrayForHoldingProduct,
+      // filteredProducts: arrayForHoldingProduct,
       arrayForHoldingProduct: arrayForHoldingProduct,
     });
     setTimeout(() => {
