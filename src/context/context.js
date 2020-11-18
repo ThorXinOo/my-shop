@@ -316,7 +316,32 @@ class ProductProvider extends Component {
     );
   };
   sortData = () => {
-    console.log('Sort Data....');
+    // console.log('Sort Data....');
+    const { storeProducts, company, price, shipping, search } = this.state;
+    let tempProducts = [...storeProducts];
+    // console.log(typeof price);
+    let tempPrice = parseInt(price);
+    console.log(typeof tempPrice);
+
+    tempProducts = tempProducts.filter((item) => item.price <= tempPrice);
+
+    if (company !== 'all') {
+      tempProducts = tempProducts.filter((item) => item.company === company);
+    }
+    if (shipping) {
+      tempProducts = tempProducts.filter((item) => item.freeShipping === true);
+    }
+    if (search.length > 0) {
+      tempProducts = tempProducts.filter((item) => {
+        let tempSearch = search.toLowerCase();
+        let tempTitle = item.title.toLowerCase().slice(0, search.length);
+        // console.log(`tempSearch ${tempSearch} & tempTitle ${tempTitle}`);
+        if (tempSearch === tempTitle) {
+          return item;
+        }
+      });
+    }
+    this.setState({ filteredProducts: tempProducts });
   };
   render() {
     return (
