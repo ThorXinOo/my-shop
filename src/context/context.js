@@ -298,11 +298,25 @@ class ProductProvider extends Component {
     );
   };
   //handle change
-  handleChange = () => {
-    console.log('Handle Change');
+  handleChange = (event) => {
+    // console.log('Handle Change');
+    const name = event.target.name;
+    const value =
+      event.target.type === 'checkbox'
+        ? event.target.checked
+        : event.target.value;
+    // console.log(`Name : ${name}, Value ${value}`);
+    this.setState(
+      {
+        [name]: value,
+      },
+      () => {
+        this.sortData();
+      }
+    );
   };
   sortData = () => {
-    console.log('Sort Data');
+    console.log('Sort Data....');
   };
   render() {
     return (
@@ -323,6 +337,7 @@ class ProductProvider extends Component {
           decrement: this.decrement,
           removeitem: this.removeitem,
           clearCart: this.clearCart,
+          handleChange: this.handleChange,
         }}
       >
         {this.props.children}

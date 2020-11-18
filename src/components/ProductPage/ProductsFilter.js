@@ -14,7 +14,7 @@ export default function ProductsFilter() {
           company,
           price,
           shipping,
-          hanldeChange,
+          handleChange,
           storeProducts,
         } = value;
         // let companies = storeProducts.map((item) => item.company);
@@ -25,7 +25,6 @@ export default function ProductsFilter() {
           companies.add(storeProducts[product]['company']);
         }
         companies = [...companies];
-        console.log(companies);
         return (
           <div className='row my-5'>
             <div className='col-10 mx-auto'>
@@ -36,7 +35,7 @@ export default function ProductsFilter() {
                     type='text'
                     name='search'
                     id='search'
-                    onChange={hanldeChange}
+                    onChange={handleChange}
                     value={search}
                     className='filter-item'
                   />
@@ -46,7 +45,7 @@ export default function ProductsFilter() {
                   <select
                     name='company'
                     id='company'
-                    onChange={hanldeChange}
+                    onChange={handleChange}
                     value={company}
                     className='filter-item'
                   >
@@ -73,7 +72,7 @@ export default function ProductsFilter() {
                     max={max}
                     className='filter-price'
                     value={price}
-                    onChange={hanldeChange}
+                    onChange={handleChange}
                   />
                 </div>
                 <div>
@@ -85,7 +84,7 @@ export default function ProductsFilter() {
                     name='shipping'
                     id='shipping'
                     checked={shipping && true}
-                    onChange={hanldeChange}
+                    onChange={handleChange}
                   />
                 </div>
               </FilterWrapper>
